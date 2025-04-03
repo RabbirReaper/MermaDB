@@ -1,23 +1,23 @@
 <template>
   <div class="class-diagram-page">
-      <h1>類別圖</h1>
+    <h1>類別圖</h1>
 
-      <div class="template-selector">
-          <h3>選擇模板</h3>
-          <select v-model="selectedTemplate" @change="loadTemplate">
-              <option value="simple">簡單類別圖</option>
-              <option value="inheritance">繼承類別圖</option>
-              <option value="relation">關係類別圖</option>
-          </select>
-      </div>
+    <div class="template-selector">
+      <h3>選擇模板</h3>
+      <select v-model="selectedTemplate" @change="loadTemplate">
+        <option value="simple">簡單類別圖</option>
+        <option value="inheritance">繼承類別圖</option>
+        <option value="relation">關係類別圖</option>
+      </select>
+    </div>
 
-      <MermaidRenderer :initialCode="mermaidCode" ref="mermaidRenderer" />
+    <MermaidRenderer :initialCode="mermaidCode" ref="mermaidRenderer" />
 
-      <div class="actions">
-          <button @click="copyCode" class="btn">複製程式碼</button>
-          <button @click="saveSVG" class="btn">下載 SVG</button>
-          <button @click="savePNG" class="btn">下載 PNG</button>
-      </div>
+    <div class="actions">
+      <button @click="copyCode" class="btn">複製程式碼</button>
+      <button @click="saveSVG" class="btn">下載 SVG</button>
+      <button @click="savePNG" class="btn">下載 PNG</button>
+    </div>
   </div>
 </template>
 
@@ -109,28 +109,28 @@ const loadTemplate = () => {
 // 複製程式碼到剪貼板
 const copyCode = () => {
   if (mermaidRenderer.value) {
-      const code = mermaidRenderer.value.getCode()
-      navigator.clipboard.writeText(code)
-          .then(() => alert('已複製到剪貼板'))
-          .catch(err => console.error('複製失敗:', err))
+    const code = mermaidRenderer.value.getCode()
+    navigator.clipboard.writeText(code)
+      .then(() => alert('已複製到剪貼板'))
+      .catch(err => console.error('複製失敗:', err))
   }
 }
 
 // 儲存 SVG
 const saveSVG = () => {
   if (mermaidRenderer.value && mermaidRenderer.value.saveSVG) {
-      mermaidRenderer.value.saveSVG()
+    mermaidRenderer.value.saveSVG()
   } else {
-      console.error('找不到 SVG 儲存方法')
+    console.error('找不到 SVG 儲存方法')
   }
 }
 
 // 儲存 PNG
 const savePNG = () => {
   if (mermaidRenderer.value && mermaidRenderer.value.savePNG) {
-      mermaidRenderer.value.savePNG()
+    mermaidRenderer.value.savePNG()
   } else {
-      console.error('找不到 PNG 儲存方法')
+    console.error('找不到 PNG 儲存方法')
   }
 }
 </script>
@@ -153,7 +153,7 @@ select {
 }
 
 .actions {
-  margin-top: 20px;
+  margin-top: 200px;
   display: flex;
   gap: 10px;
   justify-content: center;

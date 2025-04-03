@@ -192,21 +192,21 @@ const clearEditor = () => {
     padding: 12px;
     border-radius: 6px;
     border: 1px solid #e0e0e0;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
     transition: all 0.3s ease;
 }
 
 .type-card:hover {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     transform: translateY(-3px);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .help-section {
     margin: 20px 0;
     padding: 15px;
     border-radius: 6px;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
 }
 
 .actions {
@@ -218,7 +218,7 @@ const clearEditor = () => {
 
 .btn {
     padding: 8px 16px;
-    background-color: #42b983;
+    /* background-color: #42b983; */
     color: white;
     border: none;
     border-radius: 4px;
