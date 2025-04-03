@@ -1,23 +1,23 @@
 <template>
-    <div class="sequence-diagram-page">
-        <h1>序列圖</h1>
+  <div class="sequence-diagram-page">
+    <h1>序列圖</h1>
 
-        <div class="template-selector">
-            <h3>選擇模板</h3>
-            <select v-model="selectedTemplate" @change="loadTemplate">
-                <option value="simple">簡單序列圖</option>
-                <option value="login">登入流程</option>
-                <option value="api">API 調用流程</option>
-            </select>
-        </div>
-
-        <MermaidRenderer :initialCode="mermaidCode" ref="mermaidRenderer" />
-
-        <div class="actions">
-            <button @click="copyCode" class="btn">複製程式碼</button>
-            <button @click="saveSVG" class="btn">下載 SVG</button>
-        </div>
+    <div class="template-selector">
+      <h3>選擇模板</h3>
+      <select v-model="selectedTemplate" @change="loadTemplate">
+        <option value="simple">簡單序列圖</option>
+        <option value="login">登入流程</option>
+        <option value="api">API 調用流程</option>
+      </select>
     </div>
+
+    <MermaidRenderer :initialCode="mermaidCode" ref="mermaidRenderer" />
+
+    <div class="actions">
+      <button @click="copyCode" class="btn">複製程式碼</button>
+      <button @click="saveSVG" class="btn">下載 SVG</button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -31,7 +31,7 @@ const mermaidRenderer = ref(null)
 
 // 模板庫
 const templates = {
-    simple: `sequenceDiagram
+  simple: `sequenceDiagram
       participant 客戶
       participant 服務員
       participant 廚師
@@ -42,7 +42,7 @@ const templates = {
       廚師->>服務員: 食物準備好
       服務員->>客戶: 上菜`,
 
-    login: `sequenceDiagram
+  login: `sequenceDiagram
       participant U as 用戶
       participant C as 客戶端
       participant S as 服務器
@@ -61,7 +61,7 @@ const templates = {
           C->>U: 顯示錯誤信息
       end`,
 
-    api: `sequenceDiagram
+  api: `sequenceDiagram
       participant C as 客戶端
       participant LB as 負載均衡器
       participant API as API 服務
@@ -82,69 +82,70 @@ const templates = {
           Auth->>API: 驗證失敗
           API->>LB: 返回錯誤
           LB->>C: 授權錯誤
-      end`
+      end`,
 }
 
 // 生命週期鉤子
 onMounted(() => {
-    loadTemplate()
+  loadTemplate()
 })
 
 // 加載選中的模板
 const loadTemplate = () => {
-    mermaidCode.value = templates[selectedTemplate.value]
+  mermaidCode.value = templates[selectedTemplate.value]
 }
 
 // 複製程式碼到剪貼板
 const copyCode = () => {
-    if (mermaidRenderer.value) {
-        const code = mermaidRenderer.value.getCode()
-        navigator.clipboard.writeText(code)
-            .then(() => alert('已複製到剪貼板'))
-            .catch(err => console.error('複製失敗:', err))
-    }
+  if (mermaidRenderer.value) {
+    const code = mermaidRenderer.value.getCode()
+    navigator.clipboard
+      .writeText(code)
+      .then(() => alert('已複製到剪貼板'))
+      .catch((err) => console.error('複製失敗:', err))
+  }
 }
 
 // 儲存 SVG
 const saveSVG = () => {
-    try {
-        const svgElement = document.querySelector('.mermaid-preview svg')
-        if (svgElement) {
-            const svgData = new XMLSerializer().serializeToString(svgElement)
-            const blob = new Blob([svgData], { type: 'image/svg+xml' })
-            const url = URL.createObjectURL(blob)
+  try {
+    const svgElement = document.querySelector('.mermaid-preview svg')
+    if (svgElement) {
+      const svgData = new XMLSerializer().serializeToString(svgElement)
+      const blob = new Blob([svgData], { type: 'image/svg+xml' })
+      const url = URL.createObjectURL(blob)
 
-            const a = document.createElement('a')
-            a.href = url
-            a.download = `sequence-diagram-${Date.now()}.svg`
-            document.body.appendChild(a)
-            a.click()
-            document.body.removeChild(a)
-            URL.revokeObjectURL(url)
-        }
-    } catch (error) {
-        console.error('SVG 下載失敗:', error)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `sequence-diagram-${Date.now()}.svg`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
     }
+  } catch (error) {
+    console.error('SVG 下載失敗:', error)
+  }
 }
 </script>
 
 <style scoped>
 .sequence-diagram-page {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .template-selector {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 select {
-    width: 200px;
+  width: 200px;
 }
 
 .actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 </style>

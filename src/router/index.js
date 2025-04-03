@@ -11,29 +11,29 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/flow-chart',
       name: 'flowChart',
-      component: FlowChartView
+      component: FlowChartView,
     },
     {
       path: '/class-diagram',
       name: 'classDiagram',
-      component: ClassDiagramView
+      component: ClassDiagramView,
     },
     {
       path: '/sequence-diagram',
       name: 'sequenceDiagram',
-      component: SequenceDiagramView
+      component: SequenceDiagramView,
     },
     {
       path: '/custom-diagram',
       name: 'customDiagram',
-      component: CustomDiagramView
-    }
-  ]
+      component: CustomDiagramView,
+    },
+  ],
 })
 
 export default router
